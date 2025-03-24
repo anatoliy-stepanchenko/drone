@@ -30,5 +30,4 @@ json-server --watch data.json --port 3000
 ```
 ### 3. Запуск фронтенду
 
-Відкрий файл index.html за допомогою Live Server (або просто відкрий його у браузері). Якщо використовуєш VS Code, запусти Live Server:
-```bash
+Відкрий файл index.html за допомогою Live Server (або просто відкрий його у браузері).
