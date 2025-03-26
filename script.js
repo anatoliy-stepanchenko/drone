@@ -22,7 +22,7 @@ droneImage.onload = () => {
 
 async function loadFlightData() {
   try {
-    const response = await fetch("http://localhost:3000/items");
+    const response = await fetch("https://drone-data-46yx.onrender.com/items");
     if (!response.ok) throw new Error("Помилка завантаження даних");
 
     const data = await response.json();
