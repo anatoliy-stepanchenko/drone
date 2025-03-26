@@ -2,8 +2,8 @@ const canvas = document.getElementById("flightCanvas");
 const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
 
-canvas.width = 600;
-canvas.height = 600;
+canvas.width = 673;
+canvas.height = 665;
 let dronePath = [];
 let animationFrame;
 let running = false;
@@ -14,10 +14,16 @@ let droneY = canvas.height / 2;
 let droneDirection = 0;
 
 const droneImage = new Image();
-droneImage.src = "plane.png";
+droneImage.src = "/plane.png";
 
-droneImage.onload = () => {
-  drawDrone(droneX, droneY, droneDirection);
+const backgroundImage = new Image();
+backgroundImage.src = "/map.jpg";
+
+backgroundImage.onload = () => {
+  droneImage.onload = () => {
+    drawBackground();
+    drawDrone(droneX, droneY, droneDirection);
+  };
 };
 
 async function loadFlightData() {
@@ -75,6 +81,7 @@ function animateFlight() {
     flightTrail.push({ x: droneX, y: droneY });
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
     drawPath();
     drawDrone(droneX, droneY, droneDirection);
 
@@ -88,6 +95,10 @@ function animateFlight() {
   }
 
   animationFrame = requestAnimationFrame(step);
+}
+
+function drawBackground() {
+  ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 }
 
 function drawPath() {
@@ -124,6 +135,7 @@ startButton.addEventListener("click", () => {
     startButton.innerText = "Почати";
     cancelAnimationFrame(animationFrame);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
     drawDrone(droneX, droneY, droneDirection);
   } else {
     running = true;
